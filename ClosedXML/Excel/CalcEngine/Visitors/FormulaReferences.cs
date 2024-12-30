@@ -37,9 +37,16 @@ internal class FormulaReferences
 
     internal static FormulaReferences ForFormula(string formula)
     {
-        var references = new FormulaReferences(formula);
-        FormulaParser<object?, object?, FormulaReferences>.CellFormulaA1(formula, references, CollectRefsFactory.Instance);
-        return references;
+        try
+        {
+            var references = new FormulaReferences(formula);
+            FormulaParser<object?, object?, FormulaReferences>.CellFormulaA1(formula, references, CollectRefsFactory.Instance);
+            return references;
+        } catch(Exception ex)
+        {
+            var message = ex;
+            return new FormulaReferences(string.Empty);
+        }
     }
 
     internal bool ContainsSheet(string worksheetName)

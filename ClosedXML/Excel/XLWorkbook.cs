@@ -10,6 +10,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Xml.Linq;
 using static ClosedXML.Excel.XLProtectionAlgorithm;
 
 namespace ClosedXML.Excel
@@ -719,6 +720,7 @@ namespace ClosedXML.Excel
         private String _originalFile;
         private Stream _originalStream;
         private XLWorkbookProtection _workbookProtection;
+        private LoadOptions _loadOptions;
 
         #endregion Fields
 
@@ -747,9 +749,11 @@ namespace ClosedXML.Excel
         {
         }
 
+
         public XLWorkbook(String file, LoadOptions loadOptions)
             : this(loadOptions)
         {
+            _loadOptions = loadOptions;
             _loadSource = XLLoadSource.File;
             _originalFile = file;
             _spreadsheetDocumentType = GetSpreadsheetDocumentType(_originalFile);

@@ -536,7 +536,8 @@ namespace ClosedXML.Excel
                     }
                 }
             }
-            LoadDefinedNames(workbook);
+
+            LoadDefinedNames(workbook); // Safe to load as OpenXML has already cleaned the workbook in the ParagonAgent.Integration.Office
 
             PivotTableCacheDefinitionPartReader.Load(workbookPart, this);
 
@@ -989,7 +990,7 @@ namespace ClosedXML.Excel
             return false;
         }
 
-        private void LoadDefinedNames(Workbook workbook)
+        public void LoadDefinedNames(Workbook workbook)
         {
             if (workbook.DefinedNames == null) return;
 

@@ -36,5 +36,6 @@ namespace ClosedXML.Excel
             get => _dpi;
             set => _dpi = value.X > 0 && value.Y > 0 ? value : throw new ArgumentException("DPI must be positive");
         }
+        public bool LoadNamedRanges { get; set; } = true;
     }
 }
